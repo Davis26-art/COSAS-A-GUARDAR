@@ -1,0 +1,137 @@
+body {
+    font-family: "Delius", cursive;
+    background-color: antiquewhite;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    font-family: "Delius", cursive;
+    background-color: #ff6600;
+    border: none;
+    border-radius: 5px;
+    color: antiquewhite;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #804016;
+}
+
+.hero {
+
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(Imagenes/gato_resta.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    color: antiquewhite;
+    text-align: center;
+    margin: auto 7px;
+    padding: 100px 20px;
+    border-radius: 15px;
+
+}
+
+.hero-overlay {
+    /* From https://css.glass */
+    background: rgba(0, 0, 0, 0.41);
+    border-radius: 16px;
+    margin: 15px 10px;
+    padding: 15px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3.8px);
+    -webkit-backdrop-filter: blur(3.8px);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    position: relative;
+    z-index: 1;
+}
+
+header {
+    background-color: #333;
+    color: antiquewhite;
+    margin: 10px 7px 30px 7px;
+    padding: 10px 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 15px;
+}
+
+header h2 {
+    margin: 15px 10px 15px 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 15px 10px;
+    padding: 8px 12px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.especialidades-container {
+    display: flex;
+    margin: 7px;
+    gap: 11px;
+}
+
+.especialidad {
+    background-color: #333;
+    color: antiquewhite;
+    border-radius: 15px;
+    display: inline-block;
+    margin: 20px;
+    padding: 10px;
+    text-align: center;
+    width: calc(33% - 40px);
+    box-sizing: border-box;
+}
+
+.especialidad img {
+    border-radius: 30px;
+    width: 300px;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 30px;
+}
+.menu-container{
+    display: flex;
+    margin: 7px;
+    gap: 11px;
+}
+
+.menu-item{
+    background-color: #333;
+    color: antiquewhite;
+    border-radius: 15px;
+    display: inline-block;
+    padding: 10px;
+    margin: 20px;
+    height: 210px;
+    text-align: justify;
+    width: calc(33% - 40px);
+    box-sizing: border-box;
+}
+
+footer {
+    background-color: #333;
+    color: antiquewhite;
+    padding: 10px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1, h2 {
+    margin: auto 16px;
+}
