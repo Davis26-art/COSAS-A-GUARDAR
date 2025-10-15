@@ -1,0 +1,117 @@
+Perfecto, si estás diseñando un **mockup** donde se evidencien los **dashboards de datos en forma de gráficas** para el proyecto de predicción de plagas, lo ideal es crear una interfaz que muestre la información más relevante **de forma visual, clara y jerárquica**, enfocándote en los datos que necesita ver cada perfil de usuario.
+
+A continuación te propongo una estructura de **mockup para dashboard** (que podrías hacer en Figma, Adobe XD, Sketch, Canva, etc.), orientado especialmente al **perfil del científico de datos** o personal técnico.
+
+---
+
+## 🎯 **Objetivo del Mockup:**
+
+Visualizar las predicciones de infestación, evolución histórica, métricas del modelo y alertas actuales a través de gráficos interactivos.
+
+---
+
+## 🖼️ **Distribución del Dashboard (Mockup)**
+
+### 📍 **1. Header (parte superior)**
+
+* Logo del sistema / nombre del proyecto.
+* Selector de cultivo: ⬇️ Maíz | Arroz
+* Selector de región / campo específico.
+* Fecha o periodo de análisis.
+* Botón de "Exportar PDF/CSV".
+
+---
+
+### 📊 **2. Sección de Gráficas Principales**
+
+#### **A. Mapa Interactivo de Zonas Afectadas (si hay datos geográficos)**
+
+* Colores de calor (heatmap): riesgo bajo, medio, alto.
+* Filtro por cultivo / fecha.
+
+#### **B. Serie Temporal de Predicción de Plagas**
+
+* Gráfico de líneas o área.
+* Eje Y: % de probabilidad de infestación.
+* Eje X: línea de tiempo.
+* Línea base: umbral de alerta.
+
+#### **C. Barras Comparativas por Región**
+
+* Comparación entre zonas o campos.
+* Eje Y: nivel de infestación estimado.
+* Eje X: nombre de las regiones.
+
+#### **D. Métricas del Modelo (KPI)**
+
+Tarjetas destacadas:
+
+* ✅ Precisión actual del modelo: 87%
+* 🔁 Última actualización: 14 Oct 2025
+* 🔍 Cantidad de alertas activas: 12
+* 📦 Datos procesados: 342 registros esta semana
+
+---
+
+### 🔔 **3. Sección de Alertas Actuales**
+
+* Lista o tarjetas tipo "warning":
+
+  * Cultivo: Maíz
+  * Región: Zona Norte
+  * Nivel de riesgo: Alto
+  * Recomendación: Aplicar tratamiento A en 48h.
+
+---
+
+### 📈 **4. Gráfico de Variables Clave**
+
+* Gráfico de líneas múltiples:
+
+  * Temperatura 🌡️
+  * Humedad 💧
+  * Plagas reportadas 🐛
+* Relación con la predicción (modelo de correlación).
+
+---
+
+### 🧪 **5. Panel de Validación del Modelo**
+
+* Histograma de error del modelo.
+* Matriz de confusión.
+* Curva ROC o AUC (si se quiere mostrar nivel técnico).
+
+---
+
+## 🎨 **Estilo Visual Recomendado**
+
+* Paleta basada en:
+
+  * Verde (seguro)
+  * Amarillo (precaución)
+  * Rojo (alerta)
+  * Azul (datos y confianza)
+* Gráficos con tooltips al pasar el mouse.
+* Íconos agrícolas o meteorológicos simples.
+* Fuentes legibles como **Roboto, Open Sans o Montserrat**.
+
+---
+
+## 🛠️ Herramientas para Crear el Mockup
+
+Puedes usar:
+
+* **Figma**: Ideal para colaboración y prototipos interactivos.
+* **Canva (modo presentación)**: Más simple, pero muy útil para exposiciones.
+* **Adobe XD / Sketch**: Si estás trabajando con un equipo de diseño UI.
+* **Tableau (para mostrar ejemplos reales de dashboards)**.
+
+---
+
+## ✅ Tip Extra
+
+Si el mockup es para una presentación o entrega, puedes incluir una **vista móvil reducida** (por ejemplo, solo mostrando las alertas o un resumen de KPIs), para evidenciar la adaptabilidad del diseño.
+
+---
+
+¿Quieres que te genere un ejemplo visual de este mockup o te cree un wireframe básico en texto o en imagen? Puedo hacerlo si me confirmas el estilo que buscas (profesional, rural, moderno, etc.).

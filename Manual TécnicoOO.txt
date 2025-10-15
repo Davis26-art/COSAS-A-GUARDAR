@@ -1,0 +1,146 @@
+Perfecto ✅ Veo que deseas llenar plantillas de **casos de uso** como la de la imagen (con campos como *nombre, descripción, actores, flujo normal, flujo alternativo, precondiciones, postcondiciones, etc.*) para tu **Proyecto de Sistema de Predicción de Plagas Basado en IA**.
+
+A continuación, te dejo **la información que puedes usar para llenar cada plantilla** con base en los casos de uso que mencionamos antes. Puedes copiar y pegar los datos en tu formato de tabla (como la imagen).
+
+---
+
+### 🧩 **Caso de Uso 1: Recolección y Análisis de Datos Históricos y Actuales**
+
+**Nombre:** Sistema de Predicción de Plagas Basado en IA
+**Módulo:** Recolección de Datos
+**Caso de Uso:** Recolección y Análisis de Datos Históricos y Actuales
+**Autor:** Unidad de Análisis de Datos
+**Fecha:** *(Coloca la actual)*
+**Descripción:** Obtener y procesar datos históricos y actuales de cultivos para entrenar y actualizar el modelo predictivo.
+**Actores:** Científico de Datos
+**Precondiciones:** El sistema debe tener acceso a las bases de datos históricas y a los sensores actuales de campo.
+
+**Flujo Normal:**
+1️⃣ El Científico de Datos solicita al sistema la recolección de datos históricos y en tiempo real.
+2️⃣ El sistema accede a las fuentes de datos y descarga la información.
+3️⃣ El sistema limpia, transforma y almacena los datos en la base MongoDB.
+4️⃣ El modelo IA utiliza los datos para entrenamiento y ajuste.
+
+**Flujo Alternativo:**
+
+* Si alguna fuente de datos no está disponible, el sistema genera una alerta de error y registra el fallo.
+
+**Postcondiciones:**
+Los datos quedan almacenados, validados y listos para el modelado predictivo.
+
+**Frecuencia:** Semanal o según actualización de sensores.
+**Tiempo Esperado de Respuesta:** 10 segundos por lote de datos.
+
+---
+
+### 🧩 **Caso de Uso 2: Generación de Predicciones de Infestación de Plagas**
+
+**Nombre:** Sistema de Predicción de Plagas Basado en IA
+**Módulo:** Motor de Predicción
+**Caso de Uso:** Generar Predicciones de Infestación
+**Autor:** Unidad de Análisis de Datos
+**Fecha:** *(Actual)*
+**Descripción:** El sistema predice la probabilidad de infestación de plagas en cultivos de maíz y arroz.
+**Actores:** Científico de Datos, Sistema de IA
+**Precondiciones:** El modelo debe estar entrenado con datos actualizados.
+
+**Flujo Normal:**
+1️⃣ El Científico de Datos ejecuta el modelo de predicción.
+2️⃣ El sistema procesa los datos climáticos y agrícolas actuales.
+3️⃣ El modelo IA calcula las probabilidades de infestación.
+4️⃣ El sistema almacena y muestra los resultados en el dashboard.
+
+**Flujo Alternativo:**
+
+* Si el modelo no converge o hay datos faltantes, el sistema genera una alerta de error y sugiere revisión de datos.
+
+**Postcondiciones:**
+Se genera una predicción con precisión ≥ 85%.
+
+**Frecuencia:** Diaria o bajo demanda.
+**Tiempo Esperado de Respuesta:** 5 segundos por lote de datos.
+
+---
+
+### 🧩 **Caso de Uso 3: Generación de Recomendaciones Preventivas**
+
+**Módulo:** Recomendaciones Automáticas
+**Caso de Uso:** Generación de Recomendaciones
+**Autor:** Unidad de Análisis de Datos
+**Descripción:** Crear recomendaciones para prevenir infestaciones basadas en las predicciones del modelo.
+**Actores:** Sistema de IA, Agricultor
+**Precondiciones:** Debe existir una predicción válida reciente.
+
+**Flujo Normal:**
+1️⃣ El sistema analiza las predicciones de infestación.
+2️⃣ Se identifican las zonas o cultivos con riesgo alto.
+3️⃣ El sistema genera recomendaciones específicas (tratamientos, fertilización, riego).
+4️⃣ Las recomendaciones se muestran al agricultor en el dashboard o por alerta.
+
+**Flujo Alternativo:**
+
+* Si no hay predicciones disponibles, el sistema informa al agricultor y sugiere generar una nueva predicción.
+
+**Postcondiciones:**
+El agricultor recibe las recomendaciones preventivas actualizadas.
+
+**Frecuencia:** Según predicciones (diaria o semanal).
+**Tiempo Esperado de Respuesta:** 3 segundos.
+
+---
+
+### 🧩 **Caso de Uso 4: Recepción de Alertas por Parte del Agricultor**
+
+**Módulo:** Alertas Predictivas
+**Caso de Uso:** Recepción de Alertas de Plagas
+**Autor:** Unidad de Análisis de Datos
+**Descripción:** Notificar al agricultor sobre riesgos de infestación y sugerir acciones preventivas.
+**Actores:** Agricultor
+**Precondiciones:** Debe existir una predicción generada.
+
+**Flujo Normal:**
+1️⃣ El sistema detecta un nivel de riesgo superior al umbral.
+2️⃣ Se genera una alerta automática.
+3️⃣ El agricultor recibe la alerta en su interfaz o dispositivo móvil.
+4️⃣ El agricultor consulta las recomendaciones asociadas.
+
+**Flujo Alternativo:**
+
+* Si el agricultor no tiene conexión o no puede acceder al sistema, la alerta se reenvía por otro canal (correo o SMS).
+
+**Postcondiciones:**
+El agricultor es informado a tiempo sobre la amenaza de plaga.
+
+**Frecuencia:** Automática (según riesgo detectado).
+**Tiempo Esperado de Respuesta:** Instantáneo (<2 segundos).
+
+---
+
+### 🧩 **Caso de Uso 5: Visualización de Resultados en Dashboard**
+
+**Módulo:** Dashboard de Monitoreo
+**Caso de Uso:** Visualizar Resultados y Estadísticas
+**Autor:** Unidad de Análisis de Datos
+**Descripción:** Mostrar predicciones, alertas y recomendaciones en un panel visual.
+**Actores:** Científico de Datos, Agricultor
+**Precondiciones:** Deben existir datos procesados y predicciones actualizadas.
+
+**Flujo Normal:**
+1️⃣ El usuario inicia sesión en el sistema.
+2️⃣ El sistema carga el dashboard con los datos más recientes.
+3️⃣ El usuario puede filtrar información por cultivo, zona o fecha.
+4️⃣ El sistema actualiza las visualizaciones dinámicamente.
+
+**Flujo Alternativo:**
+
+* Si los datos no están disponibles, el dashboard muestra mensaje de mantenimiento.
+
+**Postcondiciones:**
+El usuario obtiene una vista clara y actualizada de los riesgos y predicciones.
+
+**Frecuencia:** Diaria.
+**Tiempo Esperado de Respuesta:** 5 segundos.
+
+---
+
+¿Quieres que te prepare estas tablas ya **formateadas exactamente como la imagen** (con los mismos recuadros y estilo), listas para llenar o imprimir? Puedo generarlas en formato **Word o Excel** según prefieras.
