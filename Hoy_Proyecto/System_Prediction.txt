@@ -1,0 +1,885 @@
+para este proyecto; que tablas especificamente podria manejar y que datos contendrian cada tabla: Proyecto 3: Sistema de Predicción de Plagas Basado
+en IA
+1. Información General del Proyecto
+• Nombre del Proyecto: Sistema de Predicción de Plagas Basado en IA.
+• Cliente: AgroPredictive Ltda.
+• Responsable del Proyecto: Unidad de Análisis de Datos.
+• Fecha de Solicitud:
+• Fecha de Entrega Esperada:
+• Resumen del Proyecto: Implementar un modelo predictivo que identifique
+probabilidades de infestación de plagas en cultivos.
+2. Alcance del Proyecto
+• Objetivo: Prevenir infestaciones mediante predicciones basadas en análisis
+históricos y condiciones actuales.
+• Componentes Principales: Modelos de IA, dashboard de visualización, alertas
+predictivas.
+• Restricciones: Datos limitados a cultivos de maíz y arroz.
+• Dependencias: Acceso a datos históricos proporcionados por el cliente.
+3. Requerimientos Funcionales
+• RF01: Recolección y análisis de datos históricos y actuales.
+o Entradas: Bases de datos históricas, sensores actuales.
+o Procesamiento: Modelado predictivo con machine learning.
+o Salidas: Predicciones y alertas.
+o Criterios de Aceptación: Precisión del modelo > 85%.
+• RF02: Generación de recomendaciones para prevenir plagas basadas en las
+predicciones.
+4. Requerimientos No Funcionales
+• RNF01: Uso eficiente de recursos en servidores locales.
+• RNF02: Escalabilidad para incluir más cultivos en el futuro.
+5. Roles y Perfiles de Usuario
+• Perfil 1: Científico de Datos - Administra modelos y analiza resultados.
+
+• Perfil 2: Agricultor - Recibe y actúa sobre alertas.
+6. Proceso de Aseguramiento de Calidad
+• Planes de Prueba: Validación del modelo con datos reales y simulaciones.
+• Herramientas: TensorFlow, Tableau.
+7. Entregables
+• Informe del modelo predictivo.
+• Sistema operativo con interfaz de usuario.
+8. Restricciones Técnicas
+• Plataforma Objetivo: Servidores locales y web.
+• Lenguajes de Programación: Python.
+• Bases de Datos: MongoDB.
+9. Plan de Trabajo y Cronograma
+• Fase 1: Análisis de datos históricos -
+• Fase 2: Desarrollo del modelo IA -
+• Fase 3: Pruebas y ajuste -
+10. Validación y Aprobaciones
+Firma del cliente: ___________________________
+
+
+
+
+Para este **Proyecto 3: Sistema de Predicción de Plagas Basado en IA**, se pueden manejar varias tablas o colecciones (si se usa **MongoDB**, como se indica en las restricciones técnicas) que representen distintos aspectos del sistema. A continuación, te detallo qué tablas/colecciones serían necesarias, qué datos contendría cada una y su propósito:
+
+---
+
+## 🧩 **1. Cultivos**
+
+* **Propósito:** Registrar información sobre los campos de cultivo monitoreados.
+* **Campos sugeridos:**
+
+  * `id_cultivo` (ID único)
+  * `tipo_cultivo` (Ej.: maíz, arroz)
+  * `ubicación` (coordenadas GPS o región)
+  * `tamaño_ha` (hectáreas)
+  * `fecha_siembra`
+  * `estado_actual` (en crecimiento, cosechado, etc.)
+
+---
+
+## 🌿 **2. Plagas**
+
+* **Propósito:** Almacenar información sobre las plagas que se desean predecir.
+* **Campos sugeridos:**
+
+  * `id_plaga`
+  * `nombre_común`
+  * `nombre_científico`
+  * `cultivos_afectados`
+  * `época_aparición` (meses o estaciones)
+  * `niveles_criticidad` (leve, moderada, severa)
+
+---
+
+## 📊 **3. Datos Históricos de Cultivos**
+
+* **Propósito:** Contener registros históricos utilizados para el entrenamiento del modelo.
+* **Campos sugeridos:**
+
+  * `id_registro`
+  * `id_cultivo`
+  * `fecha`
+  * `condiciones_climáticas`: {
+
+    * `temperatura`
+    * `humedad`
+    * `precipitaciones`
+    * `viento`
+      }
+  * `presencia_plaga` (booleano o ID de plaga)
+  * `nivel_afectación` (escala 1-5)
+
+---
+
+## 📡 **4. Datos en Tiempo Real (Sensores)**
+
+* **Propósito:** Registrar lecturas de sensores conectados al cultivo en tiempo real.
+* **Campos sugeridos:**
+
+  * `id_sensor`
+  * `id_cultivo`
+  * `timestamp`
+  * `temperatura`
+  * `humedad`
+  * `luminosidad`
+  * `tipo_sensor` (si hay varios tipos)
+
+---
+
+## 🧠 **5. Predicciones**
+
+* **Propósito:** Registrar las predicciones generadas por el modelo de IA.
+* **Campos sugeridos:**
+
+  * `id_prediccion`
+  * `id_cultivo`
+  * `fecha_prediccion`
+  * `probabilidad_plaga` (porcentaje)
+  * `tipo_plaga_predicha`
+  * `nivel_confianza` (ej. 87%)
+  * `recomendación_generada`
+
+---
+
+## 🔔 **6. Alertas**
+
+* **Propósito:** Informar al agricultor sobre riesgos detectados.
+* **Campos sugeridos:**
+
+  * `id_alerta`
+  * `id_cultivo`
+  * `fecha_alerta`
+  * `tipo_plaga`
+  * `nivel_riesgo` (bajo, medio, alto)
+  * `mensaje_alerta`
+  * `estado` (nueva, atendida, ignorada)
+
+---
+
+## 📋 **7. Recomendaciones**
+
+* **Propósito:** Sugerencias automáticas o generadas por el sistema basadas en las predicciones.
+* **Campos sugeridos:**
+
+  * `id_recomendacion`
+  * `id_prediccion`
+  * `mensaje`
+  * `acciones_sugeridas` (por ejemplo: aplicar pesticida X, reforzar monitoreo)
+  * `prioridad`
+
+---
+
+## 👤 **8. Usuarios**
+
+* **Propósito:** Gestionar accesos y roles (científico de datos, agricultor).
+* **Campos sugeridos:**
+
+  * `id_usuario`
+  * `nombre`
+  * `correo`
+  * `rol` (agricultor, científico de datos)
+  * `zona_asignada`
+  * `último_acceso`
+
+---
+
+## 🧪 **9. Validaciones del Modelo**
+
+* **Propósito:** Evaluaciones de desempeño del modelo de IA.
+* **Campos sugeridos:**
+
+  * `id_validacion`
+  * `fecha`
+  * `métrica_precision`
+  * `métrica_recall`
+  * `métrica_f1_score`
+  * `comentarios`
+  * `versión_modelo`
+
+---
+
+## Opcional: 🗂 **10. Logs del Sistema**
+
+* **Propósito:** Registro de eventos del sistema para auditoría y debugging.
+* **Campos sugeridos:**
+
+  * `id_log`
+  * `timestamp`
+  * `evento`
+  * `usuario_afectado`
+  * `detalle`
+
+---
+
+## 💡 Notas adicionales:
+
+* En MongoDB estas tablas serían **colecciones**, y puedes aprovechar la flexibilidad de los documentos JSON para anidar objetos complejos como condiciones climáticas o sensores.
+* Puedes establecer relaciones por ID entre colecciones (aunque MongoDB no es relacional, puedes mantener la integridad a nivel de aplicación).
+
+---
+
+¿Te gustaría que te ayude a diseñar los esquemas en MongoDB o convertirlos a SQL relacional también?
+
+
+esto es lo minimo requerido para que cumpla con su funcionamineto y con los requerimientos del proyecto?
+
+
+Perfecto. Como usarás **PostgreSQL**, te armaré un listado claro y organizado de las tablas necesarias con sus campos (columnas) y descripciones, para que puedas **copiar y pegar directamente en Excel** como una especie de catálogo o diccionario de datos.
+
+---
+
+## 📋 Formato para Excel
+
+Cada tabla tendrá esta estructura:
+
+* **Nombre de la Tabla**
+* **Nombre del Campo**
+* **Tipo de Dato**
+* **Descripción**
+
+---
+
+A continuación, te presento todas las **tablas mínimas necesarias** para el funcionamiento del sistema, como lo solicitaste:
+
+---
+
+### 🟩 Tabla: `cultivos`
+
+| Nombre del Campo | Tipo de Dato | Descripción                                          |
+| ---------------- | ------------ | ---------------------------------------------------- |
+| id_cultivo       | SERIAL (PK)  | ID único del cultivo                                 |
+| tipo_cultivo     | VARCHAR(50)  | Tipo de cultivo (maíz, arroz)                        |
+| ubicacion        | TEXT         | Ubicación o coordenadas GPS                          |
+| tamaño_ha        | NUMERIC(6,2) | Tamaño del cultivo en hectáreas                      |
+| fecha_siembra    | DATE         | Fecha de siembra del cultivo                         |
+| estado_actual    | VARCHAR(50)  | Estado del cultivo (en crecimiento, cosechado, etc.) |
+
+---
+
+### 🟩 Tabla: `plagas`
+
+| Nombre del Campo   | Tipo de Dato | Descripción                             |
+| ------------------ | ------------ | --------------------------------------- |
+| id_plaga           | SERIAL (PK)  | ID único de la plaga                    |
+| nombre_comun       | VARCHAR(100) | Nombre común de la plaga                |
+| nombre_cientifico  | VARCHAR(150) | Nombre científico de la plaga           |
+| cultivos_afectados | TEXT         | Lista o texto de cultivos afectados     |
+| epoca_aparicion    | VARCHAR(100) | Meses o estaciones comunes de aparición |
+| niveles_criticidad | VARCHAR(50)  | Leve, moderada, severa                  |
+
+---
+
+### 🟩 Tabla: `datos_historicos`
+
+| Nombre del Campo | Tipo de Dato | Descripción                     |
+| ---------------- | ------------ | ------------------------------- |
+| id_registro      | SERIAL (PK)  | ID único del registro           |
+| id_cultivo       | INTEGER (FK) | Cultivo relacionado             |
+| fecha            | DATE         | Fecha del registro              |
+| temperatura      | NUMERIC(5,2) | Temperatura en °C               |
+| humedad          | NUMERIC(5,2) | Humedad relativa %              |
+| precipitaciones  | NUMERIC(5,2) | Lluvia en mm                    |
+| viento           | NUMERIC(5,2) | Velocidad del viento en km/h    |
+| presencia_plaga  | BOOLEAN      | Si hubo o no presencia de plaga |
+| id_plaga         | INTEGER (FK) | Plaga identificada (si aplica)  |
+| nivel_afectacion | INTEGER      | Escala de 1 a 5 de daño         |
+
+---
+
+### 🟩 Tabla: `sensores`
+
+| Nombre del Campo | Tipo de Dato | Descripción                       |
+| ---------------- | ------------ | --------------------------------- |
+| id_sensor        | SERIAL (PK)  | ID único del sensor               |
+| id_cultivo       | INTEGER (FK) | Cultivo al que está asociado      |
+| tipo_sensor      | VARCHAR(50)  | Tipo (temperatura, humedad, etc.) |
+
+---
+
+### 🟩 Tabla: `lecturas_sensores`
+
+| Nombre del Campo | Tipo de Dato | Descripción                 |
+| ---------------- | ------------ | --------------------------- |
+| id_lectura       | SERIAL (PK)  | ID único de lectura         |
+| id_sensor        | INTEGER (FK) | Sensor relacionado          |
+| timestamp        | TIMESTAMP    | Fecha y hora de la lectura  |
+| valor            | NUMERIC(8,2) | Valor captado por el sensor |
+
+---
+
+### 🟩 Tabla: `predicciones`
+
+| Nombre del Campo   | Tipo de Dato | Descripción                |
+| ------------------ | ------------ | -------------------------- |
+| id_prediccion      | SERIAL (PK)  | ID de la predicción        |
+| id_cultivo         | INTEGER (FK) | Cultivo relacionado        |
+| fecha_prediccion   | DATE         | Fecha de la predicción     |
+| id_plaga_predicha  | INTEGER (FK) | Plaga predicha             |
+| probabilidad_plaga | NUMERIC(5,2) | Porcentaje de probabilidad |
+| nivel_confianza    | NUMERIC(5,2) | Confianza del modelo (%)   |
+| recomendacion      | TEXT         | Recomendación generada     |
+
+---
+
+### 🟩 Tabla: `alertas`
+
+| Nombre del Campo | Tipo de Dato | Descripción                |
+| ---------------- | ------------ | -------------------------- |
+| id_alerta        | SERIAL (PK)  | ID de la alerta            |
+| id_cultivo       | INTEGER (FK) | Cultivo afectado           |
+| fecha_alerta     | DATE         | Fecha de la alerta         |
+| id_plaga         | INTEGER (FK) | Plaga que generó la alerta |
+| nivel_riesgo     | VARCHAR(20)  | Bajo, medio, alto          |
+| mensaje_alerta   | TEXT         | Texto informativo          |
+| estado           | VARCHAR(20)  | Nueva, atendida, ignorada  |
+
+---
+
+### 🟩 Tabla: `recomendaciones`
+
+| Nombre del Campo   | Tipo de Dato | Descripción            |
+| ------------------ | ------------ | ---------------------- |
+| id_recomendacion   | SERIAL (PK)  | ID de recomendación    |
+| id_prediccion      | INTEGER (FK) | Predicción relacionada |
+| mensaje            | TEXT         | Recomendación concreta |
+| acciones_sugeridas | TEXT         | Medidas sugeridas      |
+| prioridad          | VARCHAR(20)  | Alta, media, baja      |
+
+---
+
+### 🟩 Tabla: `usuarios`
+
+| Nombre del Campo | Tipo de Dato | Descripción                       |
+| ---------------- | ------------ | --------------------------------- |
+| id_usuario       | SERIAL (PK)  | ID del usuario                    |
+| nombre           | VARCHAR(100) | Nombre completo                   |
+| correo           | VARCHAR(150) | Email de contacto                 |
+| rol              | VARCHAR(50)  | agricultor o científico de datos  |
+| zona_asignada    | VARCHAR(100) | Región o campo asignado           |
+| ultimo_acceso    | TIMESTAMP    | Última vez que ingresó al sistema |
+
+---
+
+### 🟩 Tabla: `validaciones_modelo`
+
+| Nombre del Campo | Tipo de Dato | Descripción                 |
+| ---------------- | ------------ | --------------------------- |
+| id_validacion    | SERIAL (PK)  | ID de la validación         |
+| fecha            | DATE         | Fecha de la validación      |
+| precision        | NUMERIC(5,2) | Precisión del modelo        |
+| recall           | NUMERIC(5,2) | Recall del modelo           |
+| f1_score         | NUMERIC(5,2) | F1 Score                    |
+| version_modelo   | VARCHAR(20)  | Versión del modelo evaluado |
+| comentarios      | TEXT         | Observaciones de la prueba  |
+
+---
+
+## 📤 ¿Cómo pegar esto en Excel fácilmente?
+
+1. **Abre Excel.**
+2. **Copia** el contenido de cada tabla desde aquí.
+3. **Pega directamente** en una hoja de Excel. Las celdas se separarán automáticamente por columnas si copias bien desde la tabla.
+
+Si lo deseas, también puedo prepararte un **archivo Excel real (.xlsx)** con todas estas tablas ya organizadas en pestañas o en una sola hoja. ¿Quieres que lo genere?
+
+
+para cdaa una de estas crea 3 registros de ejemplo 
+
+
+Perfecto. A continuación te presento **3 registros de ejemplo por cada una de las tablas** del sistema en formato tabular, listos para copiar y pegar en Excel junto con los nombres de campo. Esto te servirá para poblar datos ficticios iniciales en tus pruebas del sistema.
+
+---
+
+### 🟩 Tabla: `cultivos`
+
+| id_cultivo | tipo_cultivo | ubicacion           | tamaño_ha | fecha_siembra | estado_actual  |
+| ---------- | ------------ | ------------------- | --------- | ------------- | -------------- |
+| 1          | maíz         | Vereda El Campín    | 5.0       | 2025-07-15    | en crecimiento |
+| 2          | arroz        | Zona Norte - Lote A | 3.5       | 2025-08-01    | en crecimiento |
+| 3          | maíz         | Finca Los Pinos     | 4.2       | 2025-06-20    | cosechado      |
+
+---
+
+### 🟩 Tabla: `plagas`
+
+| id_plaga | nombre_comun      | nombre_cientifico       | cultivos_afectados | epoca_aparicion  | niveles_criticidad |
+| -------- | ----------------- | ----------------------- | ------------------ | ---------------- | ------------------ |
+| 1        | Gusano cogollero  | *Spodoptera frugiperda* | maíz               | julio-septiembre | moderada           |
+| 2        | Chinche del arroz | *Oebalus insularis*     | arroz              | agosto-noviembre | severa             |
+| 3        | Pulgón del maíz   | *Rhopalosiphum maidis*  | maíz               | todo el año      | leve               |
+
+---
+
+### 🟩 Tabla: `datos_historicos`
+
+| id_registro | id_cultivo | fecha      | temperatura | humedad | precipitaciones | viento | presencia_plaga | id_plaga | nivel_afectacion |
+| ----------- | ---------- | ---------- | ----------- | ------- | --------------- | ------ | --------------- | -------- | ---------------- |
+| 1           | 1          | 2024-07-20 | 28.5        | 75.0    | 12.0            | 10.0   | TRUE            | 1        | 3                |
+| 2           | 2          | 2024-08-10 | 30.1        | 85.2    | 20.0            | 5.2    | FALSE           | NULL     | 0                |
+| 3           | 3          | 2024-09-01 | 27.8        | 78.5    | 5.0             | 12.0   | TRUE            | 3        | 2                |
+
+---
+
+### 🟩 Tabla: `sensores`
+
+| id_sensor | id_cultivo | tipo_sensor |
+| --------- | ---------- | ----------- |
+| 1         | 1          | temperatura |
+| 2         | 1          | humedad     |
+| 3         | 2          | humedad     |
+
+---
+
+### 🟩 Tabla: `lecturas_sensores`
+
+| id_lectura | id_sensor | timestamp           | valor |
+| ---------- | --------- | ------------------- | ----- |
+| 1          | 1         | 2025-10-20 08:00:00 | 29.6  |
+| 2          | 2         | 2025-10-20 08:00:00 | 70.2  |
+| 3          | 3         | 2025-10-20 08:15:00 | 80.5  |
+
+---
+
+### 🟩 Tabla: `predicciones`
+
+| id_prediccion | id_cultivo | fecha_prediccion | id_plaga_predicha | probabilidad_plaga | nivel_confianza | recomendacion                                |
+| ------------- | ---------- | ---------------- | ----------------- | ------------------ | --------------- | -------------------------------------------- |
+| 1             | 1          | 2025-10-20       | 1                 | 76.5               | 88.0            | Aplicar monitoreo semanal con trampas.       |
+| 2             | 2          | 2025-10-20       | 2                 | 64.3               | 85.5            | Verificar presencia de chinches al amanecer. |
+| 3             | 1          | 2025-10-21       | 3                 | 52.1               | 90.0            | Vigilar hojas por pulgones en fase temprana. |
+
+---
+
+### 🟩 Tabla: `alertas`
+
+| id_alerta | id_cultivo | fecha_alerta | id_plaga | nivel_riesgo | mensaje_alerta                         | estado   |
+| --------- | ---------- | ------------ | -------- | ------------ | -------------------------------------- | -------- |
+| 1         | 1          | 2025-10-20   | 1        | alto         | Alta probabilidad de gusano cogollero  | nueva    |
+| 2         | 2          | 2025-10-20   | 2        | medio        | Posible aparición de chinche del arroz | nueva    |
+| 3         | 1          | 2025-10-21   | 3        | bajo         | Riesgo leve de pulgón del maíz         | atendida |
+
+---
+
+### 🟩 Tabla: `recomendaciones`
+
+| id_recomendacion | id_prediccion | mensaje                                   | acciones_sugeridas                              | prioridad |
+| ---------------- | ------------- | ----------------------------------------- | ----------------------------------------------- | --------- |
+| 1                | 1             | Detectada posible infestación por gusano. | Inspeccionar manualmente y aplicar insecticida. | alta      |
+| 2                | 2             | Riesgo de chinche en fase de floración.   | Revisar plantas al amanecer.                    | media     |
+| 3                | 3             | Pulgón en niveles bajos.                  | No aplicar químicos aún. Solo vigilar.          | baja      |
+
+---
+
+### 🟩 Tabla: `usuarios`
+
+| id_usuario | nombre        | correo                                                          | rol                 | zona_asignada       | ultimo_acceso       |
+| ---------- | ------------- | --------------------------------------------------------------- | ------------------- | ------------------- | ------------------- |
+| 1          | Juan Pérez    | [juanp@agrocorreo.com](mailto:juanp@agrocorreo.com)             | agricultor          | Vereda El Campín    | 2025-10-20 08:30:00 |
+| 2          | Marta Sánchez | [msanchez@agropredictive.cl](mailto:msanchez@agropredictive.cl) | científico de datos | Sede Central        | 2025-10-19 17:00:00 |
+| 3          | Luis Romero   | [lromero@campo.net](mailto:lromero@campo.net)                   | agricultor          | Zona Norte - Lote A | 2025-10-18 09:15:00 |
+
+---
+
+### 🟩 Tabla: `validaciones_modelo`
+
+| id_validacion | fecha      | precision | recall | f1_score | version_modelo | comentarios                           |
+| ------------- | ---------- | --------- | ------ | -------- | -------------- | ------------------------------------- |
+| 1             | 2025-09-15 | 87.5      | 85.0   | 86.2     | v1.0           | Buen rendimiento con arroz y maíz     |
+| 2             | 2025-10-01 | 89.2      | 88.5   | 88.8     | v1.1           | Mejora tras ajuste en hiperparámetros |
+| 3             | 2025-10-18 | 90.0      | 91.0   | 90.5     | v1.2           | Incluye nuevos datos de sensores      |
+
+---
+
+Si quieres, puedo generar todos estos datos **en un archivo Excel real (.xlsx)** y pasártelo para que no tengas que copiar y pegar manualmente. ¿Te gustaría que lo haga?
+
+
+
+Perfecto, muy buena decisión. Crear las tablas manualmente desde una GUI como pgAdmin puede ser lento, así que te muestro cómo hacerlo **rápidamente** usando SQL en PostgreSQL, lo cual es la forma más eficiente para proyectos como este.
+
+---
+
+## ✅ **Opción rápida: Crear las tablas usando SQL DDL**
+
+Puedes ejecutar un **script SQL** que defina todas las tablas con sus columnas, tipos de datos y relaciones. Esto lo haces desde:
+
+* **pgAdmin** (Menú: Query Tool / Herramienta de consulta)
+* **psql** (línea de comandos)
+* **DBeaver, DataGrip u otra GUI**
+
+---
+
+## 📦 PASO A PASO
+
+### 1. Abre tu herramienta (ej: pgAdmin).
+
+### 2. Abre una nueva consulta.
+
+### 3. Copia y pega el siguiente script SQL completo.
+
+### 4. Ejecuta (F5 o botón ▶️).
+
+---
+
+## 🛠️ SCRIPT SQL PARA CREAR TODAS LAS TABLAS
+
+```sql
+-- Tabla: cultivos
+CREATE TABLE cultivos (
+    id_cultivo SERIAL PRIMARY KEY,
+    tipo_cultivo VARCHAR(50),
+    ubicacion TEXT,
+    tamaño_ha NUMERIC(6,2),
+    fecha_siembra DATE,
+    estado_actual VARCHAR(50)
+);
+
+-- Tabla: plagas
+CREATE TABLE plagas (
+    id_plaga SERIAL PRIMARY KEY,
+    nombre_comun VARCHAR(100),
+    nombre_cientifico VARCHAR(150),
+    cultivos_afectados TEXT,
+    epoca_aparicion VARCHAR(100),
+    niveles_criticidad VARCHAR(50)
+);
+
+-- Tabla: datos_historicos
+CREATE TABLE datos_historicos (
+    id_registro SERIAL PRIMARY KEY,
+    id_cultivo INTEGER REFERENCES cultivos(id_cultivo),
+    fecha DATE,
+    temperatura NUMERIC(5,2),
+    humedad NUMERIC(5,2),
+    precipitaciones NUMERIC(5,2),
+    viento NUMERIC(5,2),
+    presencia_plaga BOOLEAN,
+    id_plaga INTEGER REFERENCES plagas(id_plaga),
+    nivel_afectacion INTEGER
+);
+
+-- Tabla: sensores
+CREATE TABLE sensores (
+    id_sensor SERIAL PRIMARY KEY,
+    id_cultivo INTEGER REFERENCES cultivos(id_cultivo),
+    tipo_sensor VARCHAR(50)
+);
+
+-- Tabla: lecturas_sensores
+CREATE TABLE lecturas_sensores (
+    id_lectura SERIAL PRIMARY KEY,
+    id_sensor INTEGER REFERENCES sensores(id_sensor),
+    timestamp TIMESTAMP,
+    valor NUMERIC(8,2)
+);
+
+-- Tabla: predicciones
+CREATE TABLE predicciones (
+    id_prediccion SERIAL PRIMARY KEY,
+    id_cultivo INTEGER REFERENCES cultivos(id_cultivo),
+    fecha_prediccion DATE,
+    id_plaga_predicha INTEGER REFERENCES plagas(id_plaga),
+    probabilidad_plaga NUMERIC(5,2),
+    nivel_confianza NUMERIC(5,2),
+    recomendacion TEXT
+);
+
+-- Tabla: alertas
+CREATE TABLE alertas (
+    id_alerta SERIAL PRIMARY KEY,
+    id_cultivo INTEGER REFERENCES cultivos(id_cultivo),
+    fecha_alerta DATE,
+    id_plaga INTEGER REFERENCES plagas(id_plaga),
+    nivel_riesgo VARCHAR(20),
+    mensaje_alerta TEXT,
+    estado VARCHAR(20)
+);
+
+-- Tabla: recomendaciones
+CREATE TABLE recomendaciones (
+    id_recomendacion SERIAL PRIMARY KEY,
+    id_prediccion INTEGER REFERENCES predicciones(id_prediccion),
+    mensaje TEXT,
+    acciones_sugeridas TEXT,
+    prioridad VARCHAR(20)
+);
+
+-- Tabla: usuarios
+CREATE TABLE usuarios (
+    id_usuario SERIAL PRIMARY KEY,
+    nombre VARCHAR(100),
+    correo VARCHAR(150),
+    rol VARCHAR(50),
+    zona_asignada VARCHAR(100),
+    ultimo_acceso TIMESTAMP
+);
+
+-- Tabla: validaciones_modelo
+CREATE TABLE validaciones_modelo (
+    id_validacion SERIAL PRIMARY KEY,
+    fecha DATE,
+    precision NUMERIC(5,2),
+    recall NUMERIC(5,2),
+    f1_score NUMERIC(5,2),
+    version_modelo VARCHAR(20),
+    comentarios TEXT
+);
+```
+
+---
+
+## ⏱️ ¿Qué ganas con esto?
+
+* Puedes crear todas las tablas **en segundos**.
+* Ya están todas las **relaciones** (foreign keys).
+* Puedes extender o modificar fácilmente desde el mismo script.
+
+---
+
+## 🧠 Consejos adicionales
+
+1. **Guardar el script en un archivo `.sql`**: así puedes replicarlo en otros entornos.
+2. **Versionar el script con Git** si estás trabajando en equipo.
+3. Agrega índices si vas a hacer muchas consultas por `id_cultivo`, `id_plaga`, etc.
+4. Usa `NOT NULL` en campos que deben ser obligatorios.
+
+---
+
+¿Quieres que te prepare también un script para insertar los **registros de ejemplo** que ya vimos?
+
+Excelente pregunta. Para alimentar tu sistema de predicción de plagas con datos reales y útiles (históricos, meteorológicos, de plagas, etc.), necesitarás recolectar datos de distintas fuentes confiables. A continuación te doy una guía completa con **los tipos de datos necesarios**, **dónde puedes obtenerlos**, y **cómo hacerlo** de manera práctica:
+
+---
+
+## 🧩 1. **Datos Meteorológicos (Temperatura, Humedad, Lluvia, etc.)**
+
+### 🔍 ¿Qué necesitas?
+
+* Datos históricos y en tiempo real de clima por región: temperatura, humedad, precipitaciones, velocidad del viento.
+
+### 🌐 Fuentes:
+
+| Fuente                                        | Tipo                     | Cómo acceder                                       |
+| --------------------------------------------- | ------------------------ | -------------------------------------------------- |
+| [OpenWeatherMap](https://openweathermap.org/) | Históricos + tiempo real | API (gratis con límites)                           |
+| [Meteostat](https://meteostat.net)            | Históricos               | API gratuita, CSV descargables                     |
+| [NOAA](https://www.ncei.noaa.gov/)            | Históricos globales      | CSV / FTP / API                                    |
+| Servicios meteorológicos nacionales           | Históricos               | Ej. IDEAM (Colombia), AEMET (España), SMN (México) |
+
+### 💡 Tip:
+
+* Usa coordenadas GPS del cultivo para pedir datos por ubicación.
+* Puedes automatizar la descarga diaria con scripts en Python usando APIs.
+
+---
+
+## 🧩 2. **Datos Históricos de Plagas**
+
+### 🔍 ¿Qué necesitas?
+
+* Qué plagas afectan qué cultivos, cuándo aparecen, en qué zonas, niveles de daño, etc.
+
+### 🌐 Fuentes:
+
+| Fuente                                                       | Tipo de info                  | Acceso                                             |
+| ------------------------------------------------------------ | ----------------------------- | -------------------------------------------------- |
+| [FAO Pest Forecasting](https://www.fao.org/pest-forecasting) | Distribución global de plagas | Informes y mapas                                   |
+| [CABI Crop Protection Compendium](https://www.cabi.org/cpc)  | Fichas técnicas, distribución | Requiere suscripción (algunos datos son gratuitos) |
+| Organismos agrícolas locales (ej. ICA, SENASA, SAGARPA)      | Reportes por país/región      | Portales o PDFs                                    |
+| Tesis y artículos académicos                                 | Estudios de casos por plaga   | Google Scholar, ResearchGate                       |
+| INTA, EMBRAPA, CIAT, CIP                                     | Datos regionales              | Sitios oficiales, informes                         |
+
+### 💡 Tip:
+
+* Puedes crear una base de datos inicial con Excel recolectando los nombres de plagas, épocas y cultivos afectados.
+
+---
+
+## 🧩 3. **Datos del Cultivo (internos del cliente)**
+
+### 🔍 ¿Qué necesitas?
+
+* Fechas de siembra, tipos de cultivo, ubicación exacta, prácticas agronómicas, registros de plagas anteriores.
+
+### 🛠️ ¿Dónde obtenerlos?
+
+* Directamente del cliente: AgroPredictive Ltda.
+* Archivos Excel o bases de datos que tengan ellos.
+* Formularios de captura digital (si no lo tienen).
+
+---
+
+## 🧩 4. **Lecturas de Sensores (Tiempo real)**
+
+### 🔍 ¿Qué necesitas?
+
+* Datos en vivo de sensores de temperatura, humedad del suelo, luminosidad, etc.
+
+### 🛠️ ¿Cómo obtenerlos?
+
+* A través de estaciones meteorológicas instaladas en el campo.
+* Sistemas IoT (como sensores de **Davis Instruments**, **Bosch**, **Libelium**, etc.).
+* APIs si ya tienen sensores conectados a la nube.
+* CSV o feeds exportados desde sus sistemas.
+
+### 💡 Tip:
+
+* Usa plataformas como **ThingSpeak**, **Blynk** o **Node-RED** para conectar y visualizar sensores fácilmente.
+
+---
+
+## 🧩 5. **Alertas Fitosanitarias y Boletines Regionales**
+
+### 🌐 Fuentes:
+
+| Fuente                                        | Qué ofrece                             |
+| --------------------------------------------- | -------------------------------------- |
+| Boletines regionales (ICA, SAG, SENASA, etc.) | Alertas actuales de brotes             |
+| FAO Locust Watch                              | Información específica sobre langostas |
+| Redes de vigilancia fitosanitaria             | Casos detectados en tiempo real        |
+| Grupos de WhatsApp/Telegram de productores    | Alertas comunitarias informales        |
+
+---
+
+## 🧩 6. **Recomendaciones Agronómicas**
+
+### 🔍 ¿Qué necesitas?
+
+* Acciones sugeridas por plaga, tipo de control (químico, biológico), umbrales de daño.
+
+### 🌐 Fuentes:
+
+| Fuente                                       | Acceso                |
+| -------------------------------------------- | --------------------- |
+| Manuales técnicos (FAO, CABI, universidades) | PDF/online            |
+| Agrónomos y expertos                         | Entrevistas, talleres |
+| Proveedores de agroinsumos                   | Fichas técnicas       |
+
+---
+
+## 🧠 ¿Cómo automatizar o facilitar esto?
+
+### 🛠 Herramientas útiles:
+
+* **Python**: para consumir APIs (clima, sensores), transformar datos.
+* **ETL Tools**: como Airbyte, Apache NiFi o scripts caseros para integración de datos.
+* **Power Automate / Zapier**: para mover archivos automáticamente.
+* **Scraping** (con precaución legal): para recolectar datos de sitios sin API.
+
+---
+
+## 🧰 ¿Qué debes tener en cuenta legalmente?
+
+* Revisa licencias de uso de datos.
+* Pide permisos al cliente si vas a usar sus datos en modelos externos.
+* Cita fuentes si usas datos académicos o públicos.
+
+---
+
+¿Quieres que te prepare un ejemplo de script en Python para descargar datos de clima o una plantilla de Excel para recolectar datos de plagas?
+
+
+¡Perfecto! A continuación te dejo **dos recursos prácticos** como pediste:
+
+---
+
+## ✅ 1. **Script en Python para obtener datos climáticos históricos (y actuales) desde OpenWeatherMap**
+
+### 🧾 ¿Qué hace este script?
+
+* Obtiene clima **actual** o **histórico** por **coordenadas GPS**.
+* Guarda los resultados como **CSV** para alimentar tu base de datos.
+
+---
+
+### 🔧 Requisitos previos:
+
+1. Crea una cuenta gratuita en [https://openweathermap.org/api](https://openweathermap.org/api).
+2. Obtén tu **API Key** (necesaria para acceder a los datos).
+3. Instala la biblioteca `requests` (si no la tienes):
+
+```bash
+pip install requests
+```
+
+---
+
+### 🐍 **Script en Python: `get_weather_data.py`**
+
+```python
+import requests
+import csv
+from datetime import datetime
+
+# ==== CONFIGURA TU API KEY Y COORDENADAS ====
+API_KEY = 'TU_API_KEY_AQUI'
+LAT = 4.7110     # Ejemplo: Bogotá, Colombia
+LON = -74.0721
+
+# ==== URL para clima actual ====
+url = f'https://api.openweathermap.org/data/2.5/weather?lat={LAT}&lon={LON}&appid={API_KEY}&units=metric'
+
+response = requests.get(url)
+data = response.json()
+
+# ==== EXTRAER DATOS CLAVE ====
+fecha = datetime.utcfromtimestamp(data['dt']).strftime('%Y-%m-%d %H:%M:%S')
+temperatura = data['main']['temp']
+humedad = data['main']['humidity']
+presion = data['main']['pressure']
+viento = data['wind']['speed']
+descripcion = data['weather'][0]['description']
+
+# ==== GUARDAR EN CSV ====
+with open('clima_actual.csv', mode='w', newline='') as archivo:
+    writer = csv.writer(archivo)
+    writer.writerow(['fecha', 'temperatura', 'humedad', 'presion', 'viento', 'descripcion'])
+    writer.writerow([fecha, temperatura, humedad, presion, viento, descripcion])
+
+print(f"✅ Datos guardados correctamente en clima_actual.csv")
+```
+
+---
+
+### 🔍 Resultado:
+
+Te generará un archivo `clima_actual.csv` con una fila como esta:
+
+```
+fecha, temperatura, humedad, presion, viento, descripcion  
+2025-10-21 13:45:00, 24.3, 78, 1012, 3.5, broken clouds
+```
+
+---
+
+## ✅ 2. **Plantilla de Excel para recolección de datos de plagas**
+
+### 🧾 ¿Qué contiene esta plantilla?
+
+Una hoja estructurada para recolectar datos como:
+
+* Nombre de la plaga
+* Cultivo afectado
+* Fecha de aparición
+* Región
+* Nivel de daño
+* Método de control sugerido
+* Fuente del dato (ej. ICA, FAO, experiencia directa)
+
+---
+
+### 📄 Estructura sugerida (puedes copiar esto en Excel):
+
+| id_plaga | nombre_comun      | nombre_cientifico       | cultivo_afectado | región       | fecha_aparicion | nivel_danio | control_sugerido            | fuente             |
+| -------- | ----------------- | ----------------------- | ---------------- | ------------ | --------------- | ----------- | --------------------------- | ------------------ |
+| 1        | Gusano cogollero  | *Spodoptera frugiperda* | maíz             | Cundinamarca | 2025-08-15      | moderado    | Insecticida biológico       | ICA boletín 082    |
+| 2        | Chinche del arroz | *Oebalus insularis*     | arroz            | Atlántico    | 2025-09-01      | alto        | Control químico selectivo   | FAO                |
+| 3        | Pulgón del maíz   | *Rhopalosiphum maidis*  | maíz             | Tolima       | 2025-07-10      | leve        | Monitoreo y control natural | Entrevista técnica |
+
+---
+
+### 💡 Puedes:
+
+* Compartir esta plantilla con técnicos/agricultores para que llenen información manual.
+* Importarla fácilmente a PostgreSQL o convertirla en CSV para cargarla con Python o PgAdmin.
+
+---
+
+## 🚀 ¿Qué sigue?
+
+¿Quieres que preparete también un script en Python para:
+
+* Leer esta plantilla de Excel y cargarla a PostgreSQL?
+* Obtener **clima histórico** para un rango de fechas?
+
+Solo dime cuál y te lo armo.
