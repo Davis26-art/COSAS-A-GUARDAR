@@ -1,0 +1,306 @@
+Excelente actitud 🙌 — entender **el porqué** de cada cosa es la mejor manera de aprender de verdad.
+Vamos a desmenuzar **cada parte** del proyecto (HTML → CSS → JavaScript) con explicaciones sencillas y ejemplos mentales para que puedas recordarlo fácilmente.
+
+---
+
+## 🧱 1️⃣ HTML — La estructura del proyecto
+
+Tu archivo HTML es el “esqueleto” de la aplicación, donde se colocan los elementos que luego el JavaScript va a manipular.
+
+```html
+<header>
+  <h1>📋 Mi lista de Tareas 📋</h1>
+</header>
+<main>
+  <section class="saludo">
+    <h2>Mis tareas</h2>
+    <input type="text" placeholder="Escribe una tarea" id="tareaInput">
+    <button id="agregarBtn">Agregar</button>
+    <p id="mensaje"></p>
+    <ul id="listaTareas"></ul>
+  </section>
+</main>
+```
+
+### 🧠 Qué recordar:
+
+* **`input`** → Es donde el usuario escribe su tarea.
+  👉 Tiene un `id="tareaInput"` para que JS pueda encontrarlo fácilmente.
+* **`button`** → Al hacer clic, ejecuta la acción de agregar la tarea.
+  👉 Lo identificamos con `id="agregarBtn"`.
+* **`p` (mensaje)** → Muestra avisos, por ejemplo, si el campo está vacío.
+  👉 Lo manipulamos con JS usando `id="mensaje"`.
+* **`ul` (lista desordenada)** → Aquí se van agregando las tareas (`li`) que JS crea.
+
+Piensa en el HTML como el **escenario** de teatro donde el **JavaScript es el actor** que mueve todo y el **CSS es el diseñador** que lo hace ver bien.
+
+---
+
+## 🎨 2️⃣ CSS — Los estilos visuales
+
+El CSS controla cómo se ve todo.
+Te explico los bloques más importantes:
+
+### ✳️ Estilos generales
+
+```css
+body {
+  font-family: 'Delius', cursive;
+  background-color: #f8f9fa;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+```
+
+* Define la fuente (más agradable).
+* Colores suaves de fondo y texto.
+* Quita márgenes para que todo esté alineado bien desde el borde.
+
+### 🧩 Encabezado y pie de página
+
+```css
+header, footer {
+  background-color: #4b9cd3;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+}
+```
+
+* Fondo azul → destaca visualmente.
+* Texto blanco → contraste.
+* `padding` → agrega espacio interno (no se ve “apretado”).
+
+### 📦 Contenedor principal
+
+```css
+main {
+  max-width: 500px;
+  margin: 40px auto;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+```
+
+* `max-width`: evita que se extienda demasiado en pantallas grandes.
+* `margin: auto`: centra el contenedor.
+* `box-shadow`: da una sombra sutil (parece una tarjeta flotante).
+
+### 📝 Input y botón
+
+```css
+input {
+  width: 70%;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #4b9cd3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+button:hover {
+  background-color: #3a8bc2;
+}
+```
+
+* `width: 70%` → el input ocupa buena parte del ancho.
+* `hover` → cambia el color al pasar el mouse (da feedback visual).
+* `border-radius` → bordes redondeados (más amigable).
+
+### 📋 Lista de tareas
+
+```css
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 5px;
+}
+```
+
+* `display: flex` → organiza el texto de la tarea y el botón “X” en una misma línea.
+* `justify-content: space-between` → deja el texto a la izquierda y la “X” a la derecha.
+
+### ✅ Estado de tarea completada
+
+```css
+.completada {
+  text-decoration: line-through;
+  color: gray;
+}
+```
+
+* Cuando una tarea está terminada, le ponemos esta clase.
+* `line-through` → tacha el texto.
+* `color: gray` → muestra visualmente que ya no está activa.
+
+### ❌ Botón de eliminar
+
+```css
+.btn-eliminar {
+  background: crimson;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.btn-eliminar:hover {
+  background: darkred;
+}
+```
+
+* Colores fuertes (rojo = eliminar).
+* `hover` más oscuro = da sensación de acción.
+
+---
+
+## ⚙️ 3️⃣ JavaScript — La lógica del comportamiento
+
+Aquí es donde ocurre la “magia” 🪄
+
+```javascript
+// 1️⃣ Capturamos los elementos del DOM
+const input = document.getElementById("tareaInput");
+const botonAgregar = document.getElementById("agregarBtn");
+const lista = document.getElementById("listaTareas");
+const mensaje = document.getElementById("mensaje");
+```
+
+> 📘 **DOM (Document Object Model)**
+> Es una representación en memoria del HTML.
+> Con `getElementById` tomamos esos elementos para poder modificarlos desde JS.
+
+---
+
+### 🔘 2️⃣ Detectar clic en el botón “Agregar”
+
+```javascript
+botonAgregar.onclick = function() {
+```
+
+* Aquí usamos el evento `onclick`.
+* Cada vez que haces clic en el botón, se ejecuta esta función.
+
+---
+
+### ✏️ 3️⃣ Validar si el campo está vacío
+
+```javascript
+const textoTarea = input.value.trim();
+
+if (textoTarea === "") {
+  mensaje.textContent = "⚠️ Escribe una tarea antes de agregar.";
+  return;
+}
+mensaje.textContent = "";
+```
+
+* `.value` → obtiene lo que escribió el usuario.
+* `.trim()` → quita espacios vacíos.
+* Si está vacío, mostramos un mensaje en `<p id="mensaje">`.
+* `return;` detiene la función, evitando agregar una tarea vacía.
+
+---
+
+### 🧩 4️⃣ Crear nuevos elementos HTML con JS
+
+```javascript
+const li = document.createElement("li");
+const spanTexto = document.createElement("span");
+const botonEliminar = document.createElement("button");
+```
+
+* `createElement()` → fabrica etiquetas HTML desde JavaScript.
+  💡 Piensa que estás “construyendo” los nodos que luego se insertarán en la página.
+
+Luego les damos contenido:
+
+```javascript
+spanTexto.textContent = textoTarea;
+botonEliminar.textContent = "X";
+botonEliminar.classList.add("btn-eliminar");
+```
+
+* `.textContent` → agrega texto dentro de una etiqueta.
+* `.classList.add()` → aplica una clase CSS para darle estilo.
+
+---
+
+### ✅ 5️⃣ Marcar tarea como completada
+
+```javascript
+spanTexto.onclick = function() {
+  spanTexto.classList.toggle("completada");
+};
+```
+
+* `onclick` → se activa al hacer clic en el texto.
+* `classList.toggle("completada")` →
+  🔄 Si la clase no está, la agrega; si está, la quita.
+  👉 Así puedes marcar y desmarcar una tarea fácilmente.
+
+---
+
+### ❌ 6️⃣ Eliminar una tarea
+
+```javascript
+botonEliminar.onclick = function() {
+  li.remove();
+};
+```
+
+* `remove()` → borra el elemento del DOM.
+* En este caso, elimina todo el `<li>` que contiene esa tarea.
+
+---
+
+### 🧱 7️⃣ Insertar todo en el HTML
+
+```javascript
+li.appendChild(spanTexto);
+li.appendChild(botonEliminar);
+lista.appendChild(li);
+```
+
+* `appendChild()` → “pega” un nodo dentro de otro.
+  Ejemplo:
+
+  * `spanTexto` y `botonEliminar` dentro de `li`.
+  * Luego el `li` dentro de la lista `ul`.
+    → Es como ir metiendo cajas dentro de una caja más grande.
+
+---
+
+### 🧹 8️⃣ Limpiar el campo de texto
+
+```javascript
+input.value = "";
+```
+
+* Para que quede vacío y puedas escribir una nueva tarea.
+
+---
+
+## 💡 Resumen para recordar fácilmente:
+
+| Concepto               | Imagen mental     | Qué hace                                 |
+| ---------------------- | ----------------- | ---------------------------------------- |
+| **HTML**               | El escenario 🎭   | Donde colocas los actores (elementos)    |
+| **CSS**                | El vestuario 👗   | Da color, forma y estilo                 |
+| **JavaScript**         | El actor 🎬       | Mueve, cambia y reacciona a tus acciones |
+| **onclick**            | El timbre 🛎️     | Ejecuta algo al hacer clic               |
+| **createElement()**    | El carpintero 🔨  | Crea nuevas piezas (etiquetas)           |
+| **appendChild()**      | El pegamento 🧩   | Une piezas al HTML                       |
+| **classList.toggle()** | El interruptor 💡 | Activa/desactiva estilos                 |
+| **remove()**           | La papelera 🗑️   | Elimina cosas del DOM                    |
+
+---
+
+¿Quieres que te prepare una **versión con comentarios dentro del código** (como guía de estudio) para imprimir o repasar fácilmente?

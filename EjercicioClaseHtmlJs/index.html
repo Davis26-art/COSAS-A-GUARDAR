@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Delius&display=swap">
+    <link rel="icon" type="Imagen/jpg" href="">
+
+</head>
+
+<body>
+    <header>
+        <h1>☀️ Mi Día Perfecto ☀️</h1>
+        <button id="temaBtn">Cambiar Tema</button>
+    </header>
+    <main>
+        <section class="saludo">
+            <h2>¿Cómo te llamas?</h2>
+            <input type="text" placeholder="Escribe tu nombre" id="nombreInput">
+            <button id="saludarBtn">Saludar</button>
+            <p id="mensaje"></p>
+        </section>
+
+        <section class="Imagen">
+            <h2>Imagen del dia</h2>
+            <button id="mostrarBtn">Mostrar Imagen</button>
+            <img  id="foto" src="Img/gato.png" alt="imagne aleatoria" style="display: none;">
+        </section>
+
+        <section class="Likes">
+            <h2>¿Te gusta está página?</h2>
+            <button id="likeBtn">❤️ Me gusta</button>
+            <p id="contador">Likes: 0</p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Diseñado por David Santiago Camelo - © Todos los derechos reservados</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
