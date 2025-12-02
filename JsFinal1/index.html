@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD JavaScript</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <script src="https://kit.fontawesome.com/b5a5b5463f.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Aqui va el contenido:
+         formularios y tabla -->
+        <h1 class="mb-4">CRUD Gift Cards</h1>
+
+        <!-- FORMULARIO -->
+        <form id="form-agregar" class="mb-4">
+            <input id="gift" required placeholder="Gift" class="form-control mb-2">
+            <input id="tipo" required placeholder="Tipo" class="form-control mb-2">
+            <input id="tiempo" required placeholder="Tiempo" class="form-control mb-2">
+            <input id="precio" required placeholder="Precio" class="form-control mb-2">
+            <input id="imagen" required placeholder="URL Imagen" class="form-control mb-2">
+
+            <button class="btn btn-primary">Agregar</button>
+        </form>
+
+        <!-- TABLA -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Gift</th>
+                    <th>Tipo</th>
+                    <th>Tiempo</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpo-tabla"></tbody>
+        </table>
+
+    </div>
+
+    <!-- MODAL -->
+    <div class="modal fade" id="modal-gift">
+        <div class="modal-dialog">
+            <form id="form-modal" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Gift</h5>
+                </div>
+                <div class="modal-body">
+                    <input id="gift-modal" class="form-control mb-2">
+                    <input id="tipo-modal" class="form-control mb-2">
+                    <input id="tiempo-modal" class="form-control mb-2">
+                    <input id="precio-modal" class="form-control mb-2">
+                    <input id="imagen-modal" class="form-control mb-2">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary">Actualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Nuestro JavaScript principal -->
+    <script src="./js/app.js" type="module"></script>
+</body>
+
+<body>
+
+</html>
