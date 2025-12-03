@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "tarea": "tarea 1",
+    "completada": true
+  },
+  {
+    "id": 2,
+    "tarea": "tarea 2",
+    "completada": false
+  },
+  {
+    "id": 3,
+    "tarea": "tarea 3",
+    "completada": true
+  },
+  {
+    "id": 4,
+    "tarea": "tarea 4",
+    "completada": true
+  },
+  {
+    "tarea": "joa joa joa malaver no me deja salir",
+    "completada": false,
+    "id": 5
+  },
+  {
+    "tarea": "otra vez aqui",
+    "completada": false,
+    "id": 6
+  },
+  {
+    "tarea": "ghjgh",
+    "completada": false,
+    "id": 7
+  },
+  {
+    "tarea": "gdfgdfgdfgdf",
+    "completada": false,
+    "id": 8
+  }
+]

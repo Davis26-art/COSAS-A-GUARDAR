@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "gift": "dasdsadas",
+    "tipo": "dsadsa",
+    "tiempo": "sisas",
+    "precio": "sadsa",
+    "imagen": "dasd"
+  },
+  {
+    "id": 2,
+    "gift": "sdsadas",
+    "tipo": "sdfdfsdf",
+    "tiempo": "sikas",
+    "precio": "sdfds",
+    "imagen": "sdsfsd"
+  },
+  {
+    "id": 3,
+    "gift": "sadasd",
+    "tipo": "asdasd",
+    "tiempo": "asdasd",
+    "precio": "asdasd",
+    "imagen": "sadsad"
+  },
+  {
+    "id": 4,
+    "gift": "adsad",
+    "tipo": "sadsad",
+    "tiempo": "asdasd",
+    "precio": "dsfsdfsd",
+    "imagen": "asdasd"
+  }
+]
