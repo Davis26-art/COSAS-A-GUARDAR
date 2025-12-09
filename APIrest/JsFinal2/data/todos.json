@@ -25,18 +25,8 @@
     "id": 5
   },
   {
-    "tarea": "otra vez aqui",
+    "tarea": "de nuevo de nuevo",
     "completada": false,
     "id": 6
-  },
-  {
-    "tarea": "ghjgh",
-    "completada": false,
-    "id": 7
-  },
-  {
-    "tarea": "gdfgdfgdfgdf",
-    "completada": false,
-    "id": 8
   }
 ]

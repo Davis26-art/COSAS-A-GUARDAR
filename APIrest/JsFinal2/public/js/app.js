@@ -1,200 +1,217 @@
-// Variables Globales
+// ================================
+// CONFIG
+// ================================
 let todos = [];
 const API_URL = 'http://localhost:3000/api';
 
-// --- FUNCIONES CORE RESTFUL ---
+// ================================
+// REQUEST HELPER (ROBUSTO)
+// ================================
+const request = async (url, options = {}) => {
+    const res = await fetch(url, options);
+    const text = await res.text();
 
-// Función Central de Actualización (PUT)
-const actualizarTodoAPI = async (todo) => {
+    if (!res.ok) {
+        throw new Error(text || `Error HTTP ${res.status}`);
+    }
+
     try {
-        const response = await fetch(`${API_URL}/todos/${todo.id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(todo)
-        });
-        if (!response.ok) throw new Error('Falló la actualización.');
-    } catch (error) {
-        console.error('Error al actualizar tarea:', error);
+        return JSON.parse(text);
+    } catch {
+        return text;
     }
 };
 
-// --- FUNCIÓN DE LECTURA (READ.HTML) ---
-
+// ================================
+// READ (LISTAR) - read.html
+// ================================
 const cargarLista = async () => {
-    const listaTareas = document.querySelector("#lista-tareas");
-    if (!listaTareas) return; // Solo se ejecuta en read.html
+    const lista = document.querySelector("#lista-tareas");
+    if (!lista) return;
 
     try {
-        const response = await fetch(`${API_URL}/todos`);
-        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
-        todos = await response.json();
+        todos = await request(`${API_URL}/todos`);
+        lista.innerHTML = "";
 
-        listaTareas.innerHTML = "";
-
-        if (todos.length === 0) {
-            listaTareas.innerHTML = '<li class="list-group-item text-center text-muted">No hay tareas.</li>';
+        if (!todos.length) {
+            lista.innerHTML = `<li class="list-group-item text-muted">No hay tareas.</li>`;
             return;
         }
 
-        todos.forEach((item) => {
+        todos.forEach(t => {
             const li = document.createElement("li");
-            li.className = `list-group-item d-flex justify-content-between align-items-center ${item.completada ? 'completada' : ''}`;
-
+            li.className = "list-group-item d-flex justify-content-between align-items-center";
             li.innerHTML = `
-                <span class="flex-grow-1" onclick="window.toggleCompletada(${item.id})">${item.tarea}</span>
+                <span>${t.tarea}</span>
                 <div class="d-flex gap-2">
-                    <a href="edit.html?id=${item.id}" class="btn btn-sm btn-outline-warning">
-                        <i class="fas fa-pencil-alt"></i>
-                    </a>
-                    <button class="btn btn-sm btn-outline-danger"
-                    onclick="window.borrarTodo(${item.id})">
-                        <i class="fas fa-trash"></i>
-                    </button>
+                    <button class="btn btn-warning btn-sm" onclick="editarDesdeRead(${t.id})">Editar</button>
+                    <button class="btn btn-danger btn-sm" onclick="borrarTodo(${t.id})">Eliminar</button>
                 </div>
             `;
-            listaTareas.appendChild(li);
+            lista.appendChild(li);
         });
-    } catch (error) {
-        console.error("Error al obtener datos:", error);
-        listaTareas.innerHTML = `<li class="list-group-item text-danger">Error: ${error.message}</li>`;
+
+    } catch (err) {
+        lista.innerHTML = `<li class="list-group-item text-danger">Error: ${err.message}</li>`;
     }
 };
 
-// --- FUNCIÓN DE CREACIÓN (CREATE.HTML) ---
+window.editarDesdeRead = (id) => {
+    location.href = `edit.html?id=${id}`;
+};
 
-const agregarTodo = async (e) => { 
-    e.preventDefault();
-    const inputTarea = document.querySelector("#input-tarea");
-    const tarea = inputTarea.value.trim();
+// ================================
+// LISTAR - edit.html
+// ================================
+const cargarListaParaEditar = async () => {
+    const lista = document.querySelector("#lista-editar");
+    if (!lista) return;
 
-    if (!tarea) return; 
-    const nuevoTodo = { tarea: tarea, completada: false };
-    
     try {
-        const response = await fetch(`${API_URL}/todos`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(nuevoTodo)
+        const data = await request(`${API_URL}/todos`);
+        todos = data;  // guardar en memoria
+
+        lista.innerHTML = "";
+
+        if (!data.length) {
+            lista.innerHTML = `<li class="list-group-item text-muted">No hay tareas.</li>`;
+            return;
+        }
+
+        data.forEach(t => {
+            const li = document.createElement("li");
+            li.className = "list-group-item d-flex justify-content-between align-items-center";
+            li.innerHTML = `
+                <span>${t.tarea}</span>
+                <button class="btn btn-primary btn-sm" onclick="abrirModal(${t.id})">Editar</button>
+            `;
+            lista.appendChild(li);
         });
-        
-        if (!response.ok) throw new Error('Falló la creación de la tarea.');
-        
-        alert('Tarea creada correctamente. Volviendo a la lista.');
-        window.location.href = 'read.html'; // 🚨 Redirige a la nueva página de lectura
-        
-    } catch (error) {
-        console.error('Error al agregar tarea:', error);
+
+    } catch (err) {
+        lista.innerHTML = `<li class="list-group-item text-danger">Error: ${err.message}</li>`;
     }
 };
 
+// ================================
+// ABRIR MODAL (SIN DEPENDER DEL BACKEND)
+// ================================
+window.abrirModal = (id) => {
+    const tarea = todos.find(t => t.id == id);
 
-// --- FUNCIONES DE ACCIÓN (UPDATE/DELETE) ---
+    if (!tarea) {
+        alert("No se encontró la tarea en memoria");
+        return;
+    }
 
-window.toggleCompletada = async (id) => {
-    // Para toogle, recargamos 'todos' desde la API para asegurar que no estamos editando datos viejos.
-    await cargarLista(); 
-    const todo = todos.find((item) => item.id === id);
-    if (todo) {
-        const todoActualizado = { ...todo, completada: !todo.completada };
-        await actualizarTodoAPI(todoActualizado);
-        cargarLista(); // Recargar lista para reflejar el cambio
+    document.querySelector("#modal-id").value = tarea.id;
+    document.querySelector("#modal-input-tarea").value = tarea.tarea;
+
+    new bootstrap.Modal(document.getElementById('modalEditar')).show();
+};
+
+// ================================
+// UPDATE (GUARDAR EDICIÓN)
+// ================================
+const guardarEdicion = async (e) => {
+    e.preventDefault();
+
+    const id = document.querySelector("#modal-id").value;
+    const texto = document.querySelector("#modal-input-tarea").value.trim();
+
+    if (!texto) {
+        alert("No puedes guardar vacío");
+        return;
+    }
+
+    try {
+        await request(`${API_URL}/todos/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ tarea: texto, completada: false })
+        });
+
+        // actualizar en memoria
+        const index = todos.findIndex(t => t.id == id);
+        if (index !== -1) {
+            todos[index].tarea = texto;
+        }
+
+        bootstrap.Modal
+            .getInstance(document.getElementById("modalEditar"))
+            .hide();
+
+        cargarListaParaEditar();
+
+    } catch (err) {
+        alert("Error al guardar:\n" + err.message);
     }
 };
 
-window.borrarTodo = async (id) => { 
-    const todo = todos.find((item) => item.id === id);
-    if (!todo) return;
+// ================================
+// CARGAR AUTOMÁTICO POR URL ?id=
+// ================================
+const cargarTareaPorURL = () => {
+    const params = new URLSearchParams(location.search);
+    const id = params.get("id");
+    if (!id) return;
 
-    const validar = confirm(`¿Seguro que quiere eliminar: "${todo.tarea}"?`);
-    
-    if (validar) {
+    // espera a que cargue la lista
+    setTimeout(() => abrirModal(id), 300);
+};
+
+// ================================
+// DELETE
+// ================================
+window.borrarTodo = async (id) => {
+    if (!confirm("¿Seguro que quieres borrar?")) return;
+
+    try {
+        await request(`${API_URL}/todos/${id}`, { method: "DELETE" });
+        cargarLista();
+    } catch (err) {
+        alert("Error al borrar:\n" + err.message);
+    }
+};
+
+// ================================
+// CREATE
+// ================================
+const initCreate = () => {
+    const form = document.querySelector("#form-agregar");
+    if (!form) return;
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const input = document.querySelector("#input-tarea");
+        const texto = input.value.trim();
+        if (!texto) return;
+
         try {
-            const response = await fetch(`${API_URL}/todos/${id}`, {
-                method: 'DELETE'
+            await request(`${API_URL}/todos`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ tarea: texto, completada: false })
             });
 
-            if (response.status !== 204) throw new Error('Falló la eliminación.');
-            
-            cargarLista();
-        } catch (error) {
-            console.error('Error al eliminar tarea:', error);
+            location.href = "read.html";
+        } catch (err) {
+            alert("Error al crear:\n" + err.message);
         }
-    }
+    });
 };
 
-// --- LÓGICA DE EDICIÓN (EDIT.HTML) ---
-
-const cargarTareaParaEditar = async () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get('id');
-
-    const formEditar = document.querySelector("#form-editar");
-    const inputTareaEdit = document.querySelector("#input-tarea-edit");
-    const idDisplay = document.querySelector("#tarea-id-display");
-    const msgError = document.querySelector("#mensaje-error");
-
-    if (!formEditar || !id) return; // No estamos en edit.html o falta ID
-
-    msgError.style.display = 'block';
-
-    try {
-        // 1. Obtener la tarea específica (GET /api/todos/:id)
-        const response = await fetch(`${API_URL}/todos/${id}`);
-        if (!response.ok) throw new Error(`Tarea ID ${id} no encontrada.`);
-        
-        const tarea = await response.json();
-
-        // 2. Llenar el formulario
-        idDisplay.textContent = `(ID: ${tarea.id})`;
-        inputTareaEdit.value = tarea.tarea;
-        formEditar.style.display = 'block';
-        msgError.style.display = 'none';
-
-        // 3. Manejar el envío del formulario de edición
-        formEditar.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const nuevoTexto = inputTareaEdit.value.trim();
-            
-            if (nuevoTexto === "" || nuevoTexto === tarea.tarea) {
-                alert("No se realizaron cambios.");
-                return;
-            }
-
-            const todoActualizado = { ...tarea, tarea: nuevoTexto };
-            await actualizarTodoAPI(todoActualizado); // Envía PUT
-            
-            alert('Tarea modificada con éxito.');
-            window.location.href = 'read.html'; // Redirige a la lista
-        });
-
-    } catch (error) {
-        idDisplay.textContent = '';
-        msgError.textContent = `Error: ${error.message}`;
-        msgError.style.display = 'block';
-    }
-};
-
-
-// ------------------------------------------------------------------
-// 🚦 PUNTO DE ARRANQUE: Ejecutar solo la lógica necesaria
-// ------------------------------------------------------------------
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Lógica para read.html
-    const listaTareas = document.querySelector("#lista-tareas");
-    if (listaTareas) {
-        cargarLista(); 
+// ================================
+// INIT
+// ================================
+document.addEventListener("DOMContentLoaded", () => {
+    if (document.querySelector("#lista-tareas")) cargarLista();
+    if (document.querySelector("#lista-editar")) cargarListaParaEditar();
+    if (document.querySelector("#form-modal-editar")) {
+        document.querySelector("#form-modal-editar")
+            .addEventListener("submit", guardarEdicion);
     }
 
-    // Lógica para create.html
-    const formAgregar = document.querySelector("#form-agregar");
-    if (formAgregar) {
-        formAgregar.addEventListener('submit', agregarTodo);
-    }
-
-    // Lógica para edit.html
-    const formEditar = document.querySelector("#form-editar");
-    if (formEditar) {
-        cargarTareaParaEditar();
-    }
+    initCreate();
+    cargarTareaPorURL();
 });
