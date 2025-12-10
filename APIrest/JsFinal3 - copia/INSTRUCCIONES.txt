@@ -1,0 +1,6 @@
+1. Crear base de datos solicitudes_db en pgAdmin o sql shell = CREATE DATABASE crud_solicitudes;
+2. Click derecho → Restore → seleccionar solicitudes_backup.sql
+3. Abrir carpeta del proyecto
+4. Ejecutar: npm install
+5. Ejecutar: npm run dev
+6. Abrir http://localhost:3000
